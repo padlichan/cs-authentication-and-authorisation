@@ -1,6 +1,5 @@
-﻿namespace ConferenceManager.Model
+﻿namespace ConferenceManager.Model;
+
+public class EventsDbContext
 {
-    public class EventsDbContext
-    {
-    }
 }

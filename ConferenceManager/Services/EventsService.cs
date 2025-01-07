@@ -23,4 +23,10 @@ public class EventsService
     {
         return eventModel.AddEvent(eventToAdd);
     }
+
+    public bool IsValidEventId(int id)
+    {
+        var events = eventModel.GetEvents();
+        return events.Any(e => e.Id == id);
+    }
 }

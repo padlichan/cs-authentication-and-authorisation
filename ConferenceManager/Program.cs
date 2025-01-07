@@ -14,6 +14,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<EventsModel>();
 builder.Services.AddScoped<EventsService>();
+builder.Services.AddScoped<SpeakersService>();
+builder.Services.AddScoped<SpeakersModel>();
+builder.Services.AddScoped<AttendeesService>();
+builder.Services.AddScoped<AttendeesModel>();
+
 
 //Authentication
 var key = Encoding.UTF8.GetBytes("your-very-secure-secret-which-must-be-quite-long-see-below");
@@ -21,6 +26,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    
 })
 .AddJwtBearer(options =>
 {
@@ -34,6 +40,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
+    options.MapInboundClaims = false;
 
 });
 

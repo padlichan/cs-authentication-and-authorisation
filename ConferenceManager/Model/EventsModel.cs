@@ -1,39 +1,39 @@
 ﻿using System.Text.Json;
 
-namespace ConferenceManager.Model
+namespace ConferenceManager.Model;
+
+public class EventsModel
 {
-    public class EventsModel
+    private static List<Event> eventsData;
+    static EventsModel()
     {
-        private List<Event> eventsData;
-        public EventsModel()
-        {
-            eventsData = ReadData();
-        }
-        public Event? GetEventById(int id)
-        {
-            var events = GetEvents();
-            var eventById = events.Where(e => e.Id == id).FirstOrDefault();
-            return eventById;
-        }
+        eventsData = ReadData();
+    }
 
-        public List<Event> GetEvents()
-        {
-            return eventsData;
-        }
+    public Event? GetEventById(int id)
+    {
+        var events = GetEvents();
+        var eventById = events.Where(e => e.Id == id).FirstOrDefault();
+        return eventById;
+    }
 
-        public Event AddEvent(Event eventToAdd)
-        {
-            eventToAdd.Id = eventsData.Count != 0 ? eventsData.Last().Id + 1 : 1;
-            eventsData.Add(eventToAdd);
-            return eventsData.Last();
-        }
+    public List<Event> GetEvents()
+    {
+        return eventsData;
+    }
 
-        private List<Event> ReadData()
-        {
-            string jsonString = File.ReadAllText("Resources/EventData.json");
-            List<Event>? events = JsonSerializer.Deserialize<List<Event>>(jsonString);
-            if (events != null) return events;
-            return [];
-        }
+    public Event AddEvent(Event eventToAdd)
+    {
+        eventToAdd.Id = eventsData.Count != 0 ? eventsData.Last().Id + 1 : 1;
+        eventsData.Add(eventToAdd);
+        return eventsData.Last();
+    }
+
+    private static List<Event> ReadData()
+    {
+        string jsonString = File.ReadAllText("Resources/EventData.json");
+        List<Event>? events = JsonSerializer.Deserialize<List<Event>>(jsonString);
+        if (events != null) return events;
+        return [];
     }
 }
