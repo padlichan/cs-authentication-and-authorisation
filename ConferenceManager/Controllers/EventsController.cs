@@ -1,6 +1,7 @@
 ﻿using ConferenceManager.Services;
 using ConferenceManager.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ConferenceManager.Controllers
 {
@@ -32,6 +33,7 @@ namespace ConferenceManager.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult PostEvent(Event eventToAdd)
         {
            var addedEvent = eventService.AddEvent(eventToAdd);
