@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ConferenceManager.Model
 {
@@ -15,14 +16,19 @@ namespace ConferenceManager.Model
         [JsonPropertyName("id")]
         public int Id { get; set; }
         [JsonPropertyName("title")]
+        [Required]
         public string Title { get; set; }
         [JsonPropertyName("date")]
+        [Required]
         public DateTime Date { get; set; }
         [JsonPropertyName("venue")]
+        [Required]
         public string Venue { get; set; }
         [JsonPropertyName("description")]
+        [Required]
         public string Description { get; set; }
         [JsonPropertyName("category")]
+        [Required]
         public string Category { get; set; }
 
     }

@@ -18,4 +18,9 @@ public class EventsService
     {
         return eventModel.GetEvents();
     }
+
+    public Event AddEvent(Event eventToAdd)
+    {
+        return eventModel.AddEvent(eventToAdd);
+    }
 }

@@ -31,6 +31,13 @@ namespace ConferenceManager.Controllers
             return Ok(events);
         }
 
+        [HttpPost]
+        public IActionResult PostEvent(Event eventToAdd)
+        {
+           var addedEvent = eventService.AddEvent(eventToAdd);
+           return Ok(addedEvent);
+        }
+
 
     }
 }
