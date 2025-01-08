@@ -10,8 +10,6 @@ public class AttendeesModel
 
     public Attendee AddAttendee(Attendee attendee, Event @event)
     {
-        //Add attendee to db
-        //Return added attendee
         attendee.Event = @event;
         attendees.Add(attendee);
         return attendees.Last();

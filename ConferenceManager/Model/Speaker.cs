@@ -5,22 +5,22 @@ namespace ConferenceManager.Model;
 
 public class Speaker
 {
-    public Speaker(int userId, string name, int eventId)
+    private static int nextSpeakerId = 1;
+    public Speaker(string name, int eventId)
     {
-        UserId = userId; 
+        SpeakerId = nextSpeakerId;
+        nextSpeakerId++; 
         Name = name;
         EventId = eventId;
+        Event = null;
     }
 
-    [Required]
-    [JsonPropertyName("id")]
-    int UserId { get; set; }
-
+    public int SpeakerId { get; init; }
     [Required]
     [JsonPropertyName("name")]
     public string Name { get; set; }
     [Required]
     [JsonPropertyName("eventId")]
     public int EventId  { get; set; }
-    public Event Event { get; set; }
+    public Event? Event { get; set; }
 }

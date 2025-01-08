@@ -2,8 +2,7 @@
 using ConferenceManager.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+
 
 namespace ConferenceManager.Controllers;
 
@@ -30,7 +29,7 @@ public class AttendeesController : ControllerBase
     [HttpGet]
     public IActionResult GetAttendeesById(int attendeeId)
     {
-        int userId = GetUserIdFromContext(HttpContext);
+        int userId = ControllerHelper.GetUserIdFromContext(HttpContext);
         if (userId == int.MinValue) return BadRequest("Invalid userId");
         Result<Attendee> result = attendeesService.GetAttendeeById(userId, attendeeId);
         if (result.IsSuccess) return Ok(result.Data);
@@ -43,18 +42,10 @@ public class AttendeesController : ControllerBase
     [Authorize]
     public IActionResult PostAttendee(AttendeeDto attendeeDto)
     {
-        int userId = GetUserIdFromContext(HttpContext);
+        int userId = ControllerHelper.GetUserIdFromContext(HttpContext);
         if (userId == int.MinValue) return BadRequest("Invalid userId");
         Result<Attendee> attendeeResult = attendeesService.AddAttendee(attendeeDto, userId);
         if (attendeeResult.IsSuccess) return Ok(attendeeResult.Data);
         return BadRequest(attendeeResult.ErrorMessage);
-    }
-
-    private int GetUserIdFromContext(HttpContext context)
-    {
-        string? userIdString = HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-        if (userIdString == null) return int.MinValue;
-        if(int.TryParse(userIdString, out int userId)) return userId;
-        else return int.MinValue;
     }
 }

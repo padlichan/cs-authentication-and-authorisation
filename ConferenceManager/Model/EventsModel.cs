@@ -24,7 +24,6 @@ public class EventsModel
 
     public Event AddEvent(Event eventToAdd)
     {
-        eventToAdd.Id = eventsData.Count != 0 ? eventsData.Last().Id + 1 : 1;
         eventsData.Add(eventToAdd);
         return eventsData.Last();
     }
