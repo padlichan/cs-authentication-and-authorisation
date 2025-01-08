@@ -16,4 +16,9 @@ public class AttendeesModel
         attendees.Add(attendee);
         return attendees.Last();
     }
+
+    public Attendee? GetAttendeesById(int attendeeId)
+    {
+        return attendees.Where(a => a.AttendeeId == attendeeId).FirstOrDefault();
+    }
 }
