@@ -38,7 +38,8 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = "ConferenceManager",
         ValidateLifetime = false,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key)
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        RoleClaimType = "roles"
     };
     options.MapInboundClaims = false;
 

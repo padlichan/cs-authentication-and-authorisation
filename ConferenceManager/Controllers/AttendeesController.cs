@@ -19,6 +19,7 @@ public class AttendeesController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult GetAttendees()
     {
         List<Attendee> attendees = attendeesService.GetAttendees();
